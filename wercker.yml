@@ -7,3 +7,15 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+
+
+push:
+  steps:
+    - internal/docker-push:
+            entrypoint: node index.js
+            working-dir: $WERCKER_ROOT
+            tag: $WERCKER_GIT_COMMIT
+            ports: "3000"
+            username: $DOCKER_USERNAME
+            password: $OCI_AUTH_TOKEN
+            repository: $DOCKER_REGISTRY/$DOCKER_REPO
