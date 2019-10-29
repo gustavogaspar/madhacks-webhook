@@ -1,25 +1,25 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: madhacks-webhook
+  name: webhook
   labels:
     commit: ${WERCKER_GIT_COMMIT}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: madhacks-webhook
+      app: webhook
   template:
     metadata:
       labels:
-        app: madhacks-webhook
+        app: webhook
         commit: ${WERCKER_GIT_COMMIT}
     spec:
       containers:
-      - name: madhacks-webhook
+      - name: webhook
         image: ${DOCKER_REGISTRY}/${DOCKER_REPO}:${WERCKER_GIT_COMMIT}
         ports:
-        - name: madhacks-webhook
+        - name: webhook
           containerPort: 3000
           protocol: TCP
       imagePullSecrets:
@@ -28,16 +28,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: madhacks-webhook
+  name: webhook
   labels:
-    app: madhacks-webhook
+    app: webhook
     commit: ${WERCKER_GIT_COMMIT}
 spec:
   ports:
   - port: 3000
     targetPort: 3000
   selector:
-    app: madhacks-webhook
+    app: webhook
     commit: ${WERCKER_GIT_COMMIT}
   type: LoadBalancer
 ---
