@@ -11,8 +11,8 @@ module.exports = (app) => {
  
   const webhook = new WebhookClient({
     channel: {
-      url: process.env.BOT_WEBHOOK_URL,
-      secret: process.env.BOT_WEBHOOK_SECRET,
+      url: 'https://botv2iad1I0314HC40A97bots-mpaasocimt.botmxp.ocp.oraclecloud.com:443/connectors/v1/tenants/idcs-100b89d671b54afca3069fe360e4bad4/listeners/webhook/channels/2e99cc61-b856-48f3-a2d6-9b265fb0d868' ,
+      secret: '71doE4zWl74v87E6mzHfeYo4asGvgFV4' ,
     }
   });
  
