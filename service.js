@@ -8,14 +8,14 @@ module.exports = (app) => {
     logger,
   });
 
- 
+
   const webhook = new WebhookClient({
     channel: {
       url: 'https://botv2iad1I0314HC40A97bots-mpaasocimt.botmxp.ocp.oraclecloud.com:443/connectors/v1/tenants/idcs-100b89d671b54afca3069fe360e4bad4/listeners/webhook/channels/2e99cc61-b856-48f3-a2d6-9b265fb0d868' ,
       secret: '71doE4zWl74v87E6mzHfeYo4asGvgFV4' ,
     }
   });
- 
+
   webhook
     .on(WebhookEvent.ERROR, err => logger.error('Error:', err.message))
     .on(WebhookEvent.MESSAGE_SENT, message => logger.info('Message to bot:', message))
@@ -36,6 +36,10 @@ module.exports = (app) => {
     };
 
     webhook.send(message)
-      .then(() => res.send('ok'), e => res.status(400).end(e.message));
+      .then(async () =>  {
+          await webhook.on(WebhookEvent.MESSAGE_RECEIVED, mes => {
+              res.send(mes.messagePayload.text)
+          })
+          }, e => res.status(400).end(e.message));
   });
 }
