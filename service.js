@@ -1,5 +1,6 @@
 const OracleBot = require('@oracle/bots-node-sdk');
 const { WebhookClient, WebhookEvent } = OracleBot.Middleware;
+const io = require('socket.io');
 
 module.exports = (app) => {
   const logger = console;
@@ -8,6 +9,9 @@ module.exports = (app) => {
     logger,
   });
 
+io.on('connection', (socket) => {
+    console.log('User connected')
+})
 
   const webhook = new WebhookClient({
     channel: {
