@@ -31,7 +31,7 @@ deploy-to-kubernetes:
     - bash-template
 
     # The step above should leave us with a Kubernetes service and deployment yml files.
-    # We'll create a directory to move them to.
+    # We'll create a directory to move them to.a
     - script:
         name: Prepare Kubernetes files
         code: |
